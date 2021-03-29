@@ -5,4 +5,72 @@ CREATE TABLE Customers
     LastName CHARACTER VARYING(30),
     Email CHARACTER VARYING(30),
     Age INTEGER
-)
+);
+
+ALTER TABLE Customers
+RENAME COLUMN email TO gmail;
+
+INSERT INTO Customers (FirstName, LastName, Gmail, Age) 
+VALUES 
+('Назар', 'Тарасов', 14000, 18),
+('Роман', 'Лесів', 14560, 28),
+('Назар', 'Савченко', 11200, 12),
+('Тарас', 'Шевченко', 10000, 42);
+
+SELECT * FROM Customers
+
+SELECT FirstName, LastName FROM CUSTOMERS
+
+SELECT * FROM Customers
+WHERE FirstName = 'Назар' or Age > 30;
+
+UPDATE Customers
+SET Age = Age - 3
+WHERE Age > 20
+
+DELETE FROM Customers
+WHERE FirstName = 'Назар';
+
+INSERT INTO Customers (FirstName, LastName, Gmail, Age) 
+VALUES 
+('Назар', 'Тарасов', 14000, 18),
+('Віталй', 'Лесів', 16333, 29),
+('Назар', 'Савченко', 11200, 12),
+('Андрій', 'Винник', 10300, 41);
+
+SELECT DISTINCT FirstName, LastName FROM Customers;
+
+SELECT * FROM Customers
+ORDER BY Gmail DESC
+LIMIT 3 OFFSET 2;
+
+SELECT * FROM Customers
+WHERE Gmail LIKE '14%';
+
+CREATE TABLE Orders
+(
+    Id SERIAL PRIMARY KEY,
+    CustomerId INTEGER,
+    Price INTEGER,
+	Models CHARACTER VARYING(30),
+    FOREIGN KEY (CustomerId) REFERENCES Customers (Id) ON DELETE CASCADE
+);
+
+ALTER TABLE Orders
+ADD COLUMN Count INTEGER;
+
+INSERT INTO Orders (CustomerId, Price, Models, count) 
+VALUES 
+(2, 176, 'x', 5),
+(5, 160, 's', 7),
+(2, 120, 'l', 3),
+(8, 100, 'm', 6);
+
+DELETE FROM Customers
+WHERE FirstName = 'Андрій';
+
+SELECT * FROM Orders
+
+SELECT * FROM Customers
+
+SELECT AVG(Price) AS Average_Price FROM Orders;
