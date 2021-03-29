@@ -74,3 +74,15 @@ SELECT * FROM Orders
 SELECT * FROM Customers
 
 SELECT AVG(Price) AS Average_Price FROM Orders;
+
+SELECT LastName, COUNT(*) FROM Customers
+GROUP BY LastName;
+
+SELECT Customers.FirstName, Orders.Model 
+FROM Orders
+JOIN Customers ON Customers.Id = Orders.Customers.Id
+
+
+
+
+
